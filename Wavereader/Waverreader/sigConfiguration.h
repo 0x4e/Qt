@@ -91,7 +91,7 @@
    #define OTHEREND
 #endif
 
-//added by Nick MODDIFIED!!
+
 #define OTHEREND
 
 #endif  /* _SIGCONFIGURATION_H_INCLUDED */

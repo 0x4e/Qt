@@ -932,7 +932,8 @@ void SoundHeader::processInWavFormat(const char *filename) {
       exit(1);
    }
 
-   ulong tempLong;
+   //ulong tempLong;
+   uint tempLong; //convert type to try to make program work on 64bit platform
    ushort tempShort;
 
    // read the ChunkID, which should be the characters "RIFF":
@@ -940,7 +941,7 @@ void SoundHeader::processInWavFormat(const char *filename) {
    if (tempLong != 0x52494646) {
       cerr << "Error: ChunkID expected to be 0x52494646 (RIFF), but is: "
            << hex << tempLong << endl;
-      //exit(1); /MODDIFIED!!
+      exit(1);
    }
 
 
