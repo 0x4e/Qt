@@ -598,7 +598,29 @@ FileIO& operator<<(FileIO& output, SoundHeader& header) {
             output.writeBigEndian((char)0);              // even for certain
          }                                               // NeXTStep programs
          break;
-      case TYPE_WAV_PCM: 
+      case TYPE_WAV_PCM:
+       output.writeBigEndian((uint)0x52494646);      // "RIFF"
+       output.writeLittleEndian((uint)(36 + header.getBitsPerSample()
+          / 8.0  * header.getChannels() * header.getSamples()));
+       output.writeBigEndian((uint)0x57415645);      // "WAVE"
+       output.writeBigEndian((uint)0x666d7420);      // "fmt "
+       output.writeLittleEndian((uint)16);           // fmt subchunk size
+       output.writeLittleEndian((ushort)1);           // PCM format
+       output.writeLittleEndian((ushort)header.getChannels()); // channels
+       output.writeLittleEndian((uint)header.getSrate());  // sampling rate
+       output.writeLittleEndian(
+          (uint)(header.getSrate()* header.getChannels() *
+          header.getBitsPerSample() / 8));  // byte rate
+       output.writeLittleEndian((ushort) (header.getBlockAlign()));
+       output.writeLittleEndian((ushort)header.getBitsPerSample());
+       output.writeBigEndian((uint)0x64617461);   // "data"
+       output.writeLittleEndian((uint)(header.getSamples() *
+          header.getChannels() * header.getBitsPerSample()/8));
+       break;
+    default:
+       output << "Unkown soundfile format:" << header.getOutputType() << endl;
+       exit(1);
+       /*
          output.writeBigEndian((ulong)0x52494646);      // "RIFF"
          output.writeLittleEndian((ulong)(36 + header.getBitsPerSample()
             / 8.0  * header.getChannels() * header.getSamples()));
@@ -620,6 +642,7 @@ FileIO& operator<<(FileIO& output, SoundHeader& header) {
       default:
          output << "Unkown soundfile format:" << header.getOutputType() << endl;
          exit(1);
+       */
    } // end of switch
 
    return output;

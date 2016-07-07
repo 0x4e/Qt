@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.5.0, 2016-07-03T21:35:52. -->
+<!-- Written by QtCreator 3.5.0, 2016-07-07T18:51:27. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -241,7 +241,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Waverreader</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/nick/qt_apps/Wavereader/Waverreader/Waverreader.pro</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">wav_1.wav wav_2_11025_8bit.wav</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">wav_1.wav wav_1_copy.wav</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">Waverreader.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseTerminal">true</value>
