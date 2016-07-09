@@ -30,10 +30,15 @@ public:
 private:
     Ui::MainWindow *ui;
     float * get_waveform(SoundFileRead &soundfile);
+    void open_wavefile(QString file_path);
+    SoundFileRead soundfile;
 
 private slots:
     void open_file();
     void exit();
+    void update_plot();
+
+
 
 };
 
