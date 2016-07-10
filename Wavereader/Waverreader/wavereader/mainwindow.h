@@ -35,12 +35,11 @@ private:
     void init_waveplot();
     void init_fftplot();
 
+
 private slots:
     void open_file();
     void exit();
     void update_plot();
-
-
 
 };
 

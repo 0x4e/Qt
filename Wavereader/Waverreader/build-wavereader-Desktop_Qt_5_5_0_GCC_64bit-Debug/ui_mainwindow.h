@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -25,7 +26,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "qcustomplot.h"
+#include "CustomPlotZoom.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -35,14 +36,16 @@ public:
     QAction *actionOpen;
     QAction *actionExit;
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout_2;
-    QSplitter *splitter;
+    QGridLayout *gridLayout;
+    QSplitter *splitter_2;
     QWidget *widget;
     QVBoxLayout *verticalLayout;
     QTextEdit *fileStats;
     QLineEdit *num_samples;
     QPushButton *nextFrame;
-    QCustomPlot *customPlot;
+    QSplitter *splitter;
+    CustomPlotZoom *customPlot;
+    CustomPlotZoom *fft_plot;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -52,21 +55,21 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 300);
+        MainWindow->resize(528, 300);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionExit = new QAction(MainWindow);
         actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout_2 = new QVBoxLayout(centralWidget);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        splitter = new QSplitter(centralWidget);
-        splitter->setObjectName(QStringLiteral("splitter"));
-        splitter->setOrientation(Qt::Horizontal);
-        widget = new QWidget(splitter);
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        splitter_2 = new QSplitter(centralWidget);
+        splitter_2->setObjectName(QStringLiteral("splitter_2"));
+        splitter_2->setOrientation(Qt::Horizontal);
+        widget = new QWidget(splitter_2);
         widget->setObjectName(QStringLiteral("widget"));
         widget->setMaximumSize(QSize(300, 16777215));
         verticalLayout = new QVBoxLayout(widget);
@@ -89,18 +92,25 @@ public:
 
         verticalLayout->addWidget(nextFrame);
 
-        splitter->addWidget(widget);
-        customPlot = new QCustomPlot(splitter);
+        splitter_2->addWidget(widget);
+        splitter = new QSplitter(splitter_2);
+        splitter->setObjectName(QStringLiteral("splitter"));
+        splitter->setOrientation(Qt::Vertical);
+        customPlot = new CustomPlotZoom(splitter);
         customPlot->setObjectName(QStringLiteral("customPlot"));
         customPlot->setMinimumSize(QSize(400, 0));
         splitter->addWidget(customPlot);
+        fft_plot = new CustomPlotZoom(splitter);
+        fft_plot->setObjectName(QStringLiteral("fft_plot"));
+        splitter->addWidget(fft_plot);
+        splitter_2->addWidget(splitter);
 
-        verticalLayout_2->addWidget(splitter);
+        gridLayout->addWidget(splitter_2, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 400, 27));
+        menuBar->setGeometry(QRect(0, 0, 528, 27));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         MainWindow->setMenuBar(menuBar);

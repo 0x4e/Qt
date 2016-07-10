@@ -50,7 +50,7 @@
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
-       <widget class="QCustomPlot" name="customPlot" native="true">
+       <widget class="CustomPlotZoom" name="customPlot" native="true">
         <property name="minimumSize">
          <size>
           <width>400</width>
@@ -58,7 +58,7 @@
          </size>
         </property>
        </widget>
-       <widget class="QCustomPlot" name="fft_plot" native="true"/>
+       <widget class="CustomPlotZoom" name="fft_plot" native="true"/>
       </widget>
      </widget>
     </item>
@@ -111,9 +111,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QCustomPlot</class>
+   <class>CustomPlotZoom</class>
    <extends>QWidget</extends>
-   <header>qcustomplot.h</header>
+   <header>CustomPlotZoom.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

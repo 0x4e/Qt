@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(exit()));
     connect(ui->nextFrame, SIGNAL(clicked(bool)), this, SLOT(update_plot()));
 
+
     //setup sample size input box
     ui->num_samples->setValidator( new QIntValidator(1, 100000, this) );
     ui->num_samples->setText("1024");
@@ -28,6 +29,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 void MainWindow::open_file()
 {
@@ -56,7 +58,8 @@ void MainWindow::init_waveplot()
 
     // Note: we could have also just called customPlot->rescaleAxes(); instead
     // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
-    ui->customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    ui->customPlot->setInteractions(QCP::iRangeDrag | QCP::iSelectPlottables);
+    ui->customPlot->setZoomMode(true);
 }
 
 void MainWindow::init_fftplot()
@@ -72,7 +75,8 @@ void MainWindow::init_fftplot()
 
     // Note: we could have also just called customPlot->rescaleAxes(); instead
     // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
-    ui->fft_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    ui->fft_plot->setInteractions(QCP::iRangeDrag | QCP::iSelectPlottables);
+    ui->fft_plot->setZoomMode(true);
 }
 
 
@@ -118,7 +122,7 @@ void MainWindow::update_plot()
         QVector<double> x(number_of_samples),
                 wave(number_of_samples);
 
-        for (i=0; i<number_of_samples; i++) {
+        for (i=0; i < number_of_samples; i++) {
 
             wave[i] = soundfile.getCurrentSample16Bit(0);
             //qDebug() << "Wave - " << wave[i];
@@ -167,7 +171,7 @@ void MainWindow::update_plot()
 
         for (i = 0; i < number_of_samples/2; i++)
         {
-            fftx[i] = i * ((1.0 *soundfile.getSrate()/number_of_samples));
+            fftx[i] = i * (1.0 *soundfile.getSrate()/number_of_samples);
             ffty[i] = (sqrt((out[i].r *out[i].r) + (out[i].i *out[i].i)))/number_of_samples ;
         }
 

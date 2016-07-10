@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     SoundFileRead.cpp \
     SoundFileWrite.cpp \
     SoundHeader.cpp \
-    kiss_fft.c
+    kiss_fft.c \
+    CustomPlotZoom.cpp
 
 HEADERS  += mainwindow.h \
     Array.h \
@@ -39,6 +40,7 @@ HEADERS  += mainwindow.h \
     SoundFileRead.h \
     SoundFileWrite.h \
     SoundHeader.h \
-    kiss_fft.h
+    kiss_fft.h \
+    CustomPlotZoom.h
 
 FORMS    += mainwindow.ui
