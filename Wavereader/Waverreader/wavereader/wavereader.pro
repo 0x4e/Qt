@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     soundfilehelpers.cpp \
     SoundFileRead.cpp \
     SoundFileWrite.cpp \
-    SoundHeader.cpp
+    SoundHeader.cpp \
+    kiss_fft.c
 
 HEADERS  += mainwindow.h \
     Array.h \
@@ -37,6 +38,7 @@ HEADERS  += mainwindow.h \
     soundfilehelpers.h \
     SoundFileRead.h \
     SoundFileWrite.h \
-    SoundHeader.h
+    SoundHeader.h \
+    kiss_fft.h
 
 FORMS    += mainwindow.ui

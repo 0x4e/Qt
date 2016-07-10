@@ -32,6 +32,8 @@ private:
     float * get_waveform(SoundFileRead &soundfile);
     void open_wavefile(QString file_path);
     SoundFileRead soundfile;
+    void init_waveplot();
+    void init_fftplot();
 
 private slots:
     void open_file();
