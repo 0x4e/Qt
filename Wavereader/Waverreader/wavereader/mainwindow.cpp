@@ -111,21 +111,26 @@ void MainWindow::update_plot()
 {
     int i;
     int number_of_samples;
+    float rescale;
     QString str_num_samples = ui->num_samples->text();
     number_of_samples = str_num_samples.toInt();
 
 
     if (number_of_samples > 0)
     {
+        //Calculate rescale factor
+        rescale = 1.0 / pow(2,(soundfile.getBitsPerSample()-1));
+
 
         //Grab data
         QVector<double> x(number_of_samples),
                 wave(number_of_samples);
 
+
         for (i=0; i < number_of_samples; i++) {
 
-            wave[i] = soundfile.getCurrentSample16Bit(0);
-            //qDebug() << "Wave - " << wave[i];
+            wave[i] = soundfile.getCurrentSample16Bit(0) * rescale;
+
             x[i] = i *1.0/soundfile.getSrate();
             soundfile.incrementSample();
         }
@@ -172,6 +177,7 @@ void MainWindow::update_plot()
         for (i = 0; i < number_of_samples/2; i++)
         {
             fftx[i] = i * (1.0 *soundfile.getSrate()/number_of_samples);
+            //ffty[i] = 20* log((sqrt((out[i].r *out[i].r) + (out[i].i *out[i].i)))/number_of_samples) ;
             ffty[i] = (sqrt((out[i].r *out[i].r) + (out[i].i *out[i].i)))/number_of_samples ;
         }
 
