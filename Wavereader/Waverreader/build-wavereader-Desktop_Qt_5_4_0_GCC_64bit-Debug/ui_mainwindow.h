@@ -26,7 +26,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "qcustomplot.h"
+#include "CustomPlotZoom.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -44,8 +44,8 @@ public:
     QLineEdit *num_samples;
     QPushButton *nextFrame;
     QSplitter *splitter;
-    QCustomPlot *customPlot;
-    QCustomPlot *fft_plot;
+    CustomPlotZoom *customPlot;
+    CustomPlotZoom *fft_plot;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -96,11 +96,11 @@ public:
         splitter = new QSplitter(splitter_2);
         splitter->setObjectName(QStringLiteral("splitter"));
         splitter->setOrientation(Qt::Vertical);
-        customPlot = new QCustomPlot(splitter);
+        customPlot = new CustomPlotZoom(splitter);
         customPlot->setObjectName(QStringLiteral("customPlot"));
         customPlot->setMinimumSize(QSize(400, 0));
         splitter->addWidget(customPlot);
-        fft_plot = new QCustomPlot(splitter);
+        fft_plot = new CustomPlotZoom(splitter);
         fft_plot->setObjectName(QStringLiteral("fft_plot"));
         splitter->addWidget(fft_plot);
         splitter_2->addWidget(splitter);
