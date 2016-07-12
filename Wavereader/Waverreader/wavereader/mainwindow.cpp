@@ -177,18 +177,23 @@ void MainWindow::update_plot()
         for (i = 0; i < number_of_samples/2; i++)
         {
             fftx[i] = i * (1.0 *soundfile.getSrate()/number_of_samples);
-            //ffty[i] = 20* log((sqrt((out[i].r *out[i].r) + (out[i].i *out[i].i)))/number_of_samples) ;
-            //ffty[i] = (sqrt((out[i].r *out[i].r) + (out[i].i *out[i].i)))/number_of_samples ;
-            //ffty[i] = (sqrt((out[i].r *out[i].r) + (out[i].i *out[i].i)))/(number_of_samples/2) ;
 
-            //one test file very close, another off by 100. Scaling is not correct method. Need to learn correct way.
-            ffty[i] = 20* log((sqrt((out[i].r *out[i].r) + (out[i].i *out[i].i)))/(number_of_samples/2.0));
-
+            //lesson learned... Do not use log( ), use log10( )!
+            ffty[i] = 20*log10((sqrt((out[i].r *out[i].r) + (out[i].i *out[i].i)))/(number_of_samples/2.0)) ;
         }
 
         //plot waveform
         ui->fft_plot->graph(0)->setData(fftx, ffty);
+
+        //change x-axis to make log10 scale
+        //TODO make this configurable at runtime
+        ui->fft_plot->xAxis->setScaleType(QCPAxis::stLogarithmic);
+        ui->fft_plot->xAxis->setScaleLogBase(10);
+        //ui->fft_plot->xAxis->setNumberFormat("eb"); // e = exponential, b = beautiful decimal powers
+
+
         ui->fft_plot->graph(0)->rescaleAxes();
+
         ui->fft_plot->replot();
 
         //update Stats
